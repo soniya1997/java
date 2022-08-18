@@ -1,26 +1,21 @@
 pipeline {
-agent any
-stages {
-stage ('Compile Stage') {
-steps {
-withMaven(maven : 'apache-maven-3.8.5') {
-bat'mvn clean compile'
-}
-}
-}
-stage ('Testing Stage') {
-steps {
-withMaven(maven : 'apache-maven-3.8.5') {
-bat'mvn test'
-}
-}
-}
-stage ('Install Stage') {
-steps {
-withMaven(maven : 'apache-maven-3.8.5') {
-bat'mvn install'
-}
-}
-}
-}
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
 }
