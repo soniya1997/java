@@ -1,32 +1,25 @@
-pipeline{
+pipeline {
 agent any
-stages 
-{
-stage('Build') 
-{
-steps{
-echo "Building the Code.........."
-bat "mvn install"
+stages {
+stage ('Compile Stage') {
+steps {
+withMaven(maven : 'apache-maven-3.8.5') {
+bat'mvn clean compile'
 }
 }
-stage('Test') 
-{
-steps{
-echo "Testing the Code.........."
-bat "mvn test"
+}
+stage ('Testing Stage') {
+steps {
+withMaven(maven : 'apache-maven-3.8.5') {
+bat'mvn test'
 }
 }
-stage('Compile') 
-{
-steps{
-echo "Compiling the Project.........."
-bat "mvn compile"
 }
+stage ('Install Stage') {
+steps {
+withMaven(maven : 'apache-maven-3.8.5') {
+bat'mvn install'
 }
-stage('Deploy') 
-{
-steps{
-echo "Deploying the Project.........."
 }
 }
 }
